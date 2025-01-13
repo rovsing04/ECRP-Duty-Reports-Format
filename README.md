@@ -2,8 +2,7 @@
 This project is a Duty Report Format System designed to simplify the process of creating and editing duty reports for Eclipse Roleplay.
 
 See Demo video here:
-[![Watch the video](https://i.imgur.com/5Z4NES4.png)](https://www.youtube.com/watch?v=4dHIoq9wybQ)
-
+[![Watch the video](https://i9.ytimg.com/vi/4dHIoq9wybQ/mqdefault.jpg?sqp=CNjfk7wG&rs=AOn4CLD2uXIXAhHfV6LiV-iO4NTgZig5XQ&retry=3)](https://www.youtube.com/watch?v=4dHIoq9wybQ)
 
 
 The system follows the format as seen below.
