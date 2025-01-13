@@ -14,8 +14,8 @@ The system follows the format as seen below.
 
 
 ```bash
-git clone https://github.com/your-repository-name.git
-cd your-repository-name
+git clone https://github.com/rovsing04/ECRP-Duty-Reports-Format.git
+cd ECRP-Duty-Reports-Format
 ```
 Or download Zip file.
 
