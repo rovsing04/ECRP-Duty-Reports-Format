@@ -31,6 +31,8 @@ Enter the URL to ``Post Reply`` within your Duty Report Forum. Like following:
 let dutyReportReplyURL = "https://gov.eclipse-rp.net/posting.php?mode=reply&t=168215";
 ````
 
+### 3. Open main.html
+
 
 ## Support
 
