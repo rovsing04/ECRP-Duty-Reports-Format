@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Duty Report</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="duty_report_script.js" defer></script>
+  </head>
+  <body>
+    <div class="content">
+      <div class="header">Duty Report</div>
+
+      <div class="form-section">
+        <label for="sow">Start of Watch (SOW):</label>
+        <input type="datetime-local" id="sow" />
+        <button type="button" onclick="setCurrentDateTime('sow')">Now</button>
+      </div>
+
+      <div class="form-section">
+        <label for="eow">End of Watch (EOW):</label>
+        <input type="datetime-local" id="eow" />
+        <button type="button" onclick="setCurrentDateTime('eow')">Now</button>
+      </div>
+
+      <div class="form-section">
+        <label for="arrests">Arrests</label>
+        <input
+          type="number"
+          id="arrests"
+          placeholder="Enter number of arrests"
+        />
+      </div>
+
+      <div class="form-section">
+        <label for="citations">Citations</label>
+        <input
+          type="number"
+          id="citations"
+          placeholder="Enter number of citations"
+        />
+      </div>
+
+      <div class="form-section">
+        <label for="notes">Notes</label>
+        <div id="notes-display" style="margin-bottom: 10px"></div>
+        <input type="text" id="note-input" placeholder="Enter a note..." />
+        <button id="add-note" onclick="addNote()">Add</button>
+      </div>
+
+      <div class="form-section">
+        <label for="paperwork">Paperwork</label>
+        <div id="paperwork-display" style="margin-bottom: 10px"></div>
+        <button id="add-paperwork" onclick="showPaperworkForm()">Add</button>
+      </div>
+
+      <div class="action-buttons">
+        <button id="save">Save</button>
+        <button id="clear">Clear</button>
+      </div>
+
+      <div
+        id="paperwork-form"
+        style="
+          display: none;
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: #333;
+          padding: 20px;
+          border-radius: 10px;
+          z-index: 1000;
+        "
+      >
+        <h2 id="paperwork-form-title">Add Paperwork</h2>
+        <label for="paperwork-type">Paperwork Type</label>
+        <select id="paperwork-type">
+          <option value="">Select Type</option>
+          <option value="arrest-report">Arrest Report</option>
+          <option value="warrant-report">Warrant Report</option>
+          <option value="impound-report">Impound Report</option>
+          <option value="impound-release-report">Impound Release Report</option>
+          <option value="use-of-force-report">Use of Force Report</option>
+          <option value="traffic-stop-report">Traffic Stop Report</option>
+          <option value="incident-report">Incident Report</option>
+          <option value="gang-incident-report">Gang Incident Report</option>
+          <option value="gang-graffiti-report">Gang Graffiti Report</option>
+          <option value="evidence-release-report">
+            Evidence Release Report
+          </option>
+          <option value="ridealong-report">Ridealong Report</option>
+          <option value="citation-report">Citation Report</option>
+        </select>
+
+        <label for="paperwork-title">Title</label>
+        <input type="text" id="paperwork-title" placeholder="Enter title" />
+
+        <label for="paperwork-description">BBcode Quote</label>
+        <textarea
+          id="paperwork-description"
+          placeholder="Enter details..."
+        ></textarea>
+
+        <div style="margin-top: 10px">
+          <button onclick="submitPaperwork()">Submit</button>
+          <button onclick="closePaperworkForm()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
