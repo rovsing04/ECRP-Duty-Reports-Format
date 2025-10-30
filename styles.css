@@ -8,7 +8,7 @@ body {
 
 .content {
   margin: 0 auto;
-  max-width: 800px; /* Center the content and limit its width */
+  max-width: 800px;
   padding: 20px;
 }
 
@@ -16,14 +16,21 @@ body {
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 30px;
-  text-align: center; /* Center align the header */
+  text-align: center;
+  color: #007bff;
 }
 
 .form-section {
   margin-bottom: 25px;
-  padding: 15px;
+  padding: 20px;
   background-color: #2b2b2b;
   border-radius: 8px;
+  transition: box-shadow 0.3s ease-in-out;
+  border: 1px solid #333;
+}
+
+.form-section:hover {
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.2);
 }
 
 label {
@@ -41,25 +48,43 @@ button {
   width: 100%;
   padding: 12px;
   margin-top: 5px;
-  border: none;
+  border: 1px solid #444;
   border-radius: 5px;
   background-color: #333;
   color: #fff;
   font-size: 14px;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  background-color: #383838;
 }
 
 textarea {
   height: 120px;
+  resize: vertical;
+}
+
+#note-input {
+  height: 150px; /* Øget højde for bedre plads */
+  border-radius: 0 0 5px 5px;
+  margin-top: 0;
 }
 
 button {
   background-color: #007bff;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: none;
 }
 
 button:hover {
   background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
 .action-buttons {
@@ -72,35 +97,112 @@ button:hover {
   flex: 1;
 }
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  background-color: #2b2b2b;
-  border-radius: 8px;
-  overflow: hidden;
+#clear {
+  background-color: #6c757d;
 }
 
-.table th,
-.table td {
+#clear:hover {
+  background-color: #5a6268;
+}
+
+/* AVANCERET BBCODE VÆRKTØJSLINJE */
+#bbcode-toolbar {
+  display: flex;
+  flex-wrap: wrap; /* Gør at knapperne kan gå til næste linje */
+  gap: 5px;
+  row-gap: 8px; /* Afstand mellem rækker */
+  margin-bottom: 0px;
+  background-color: #383838;
+  padding: 8px;
+  border-radius: 5px 5px 0 0;
   border: 1px solid #444;
-  padding: 12px;
-  text-align: left;
+  border-bottom: none;
 }
 
-.table th {
-  background-color: #333;
+.toolbar-btn,
+.toolbar-select {
+  background-color: #555;
+  color: #fff;
+  border: 1px solid #666;
+  border-radius: 3px;
+  padding: 4px 9px;
+  cursor: pointer;
+  font-size: 14px;
+  width: auto;
+  margin-top: 0;
+  flex-shrink: 0; /* Forhindrer at knapperne bliver klemt */
+}
+.toolbar-select {
+  padding: 3px;
 }
 
-.notes-display div,
-.paperwork-display div {
-  margin-bottom: 10px;
+.toolbar-btn:hover {
+  background-color: #6a6a6a;
+  transform: none; /* Deaktiver hover-effekt fra generel knap-styling */
+}
+
+.toolbar-separator {
+  border-left: 1px solid #555;
+  margin: 0 4px;
+}
+
+/* NOTE & PAPERWORK STYLING */
+.note-item,
+.paperwork-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   padding: 12px;
   background-color: #444;
   border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.note-text,
+.paperwork-item-title {
+  flex-grow: 1;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.note-actions,
+.item-actions {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  gap: 12px;
+  margin-left: 15px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #ccc;
+  transition: color 0.2s ease;
+}
+
+.icon-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.icon-btn:hover {
+  color: #fff;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
 
 #paperwork-form {
@@ -110,21 +212,32 @@ button:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #333;
-  padding: 30px; /* Increased padding */
+  padding: 30px;
   border-radius: 15px;
-  width: 60%; /* Adjusted width */
-  max-width: 600px; /* Set a maximum width */
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6); /* Add a subtle shadow */
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
   z-index: 1000;
   color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+#paperwork-form.show,
+.modal-overlay.show {
+  display: block;
+  opacity: 1;
+}
+
+#paperwork-form.show {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 #paperwork-form h2 {
   margin-bottom: 20px;
-  font-size: 24px; /* Larger title font */
+  font-size: 24px;
   text-align: center;
 }
-
 #paperwork-form label {
   display: block;
   margin-bottom: 10px;
@@ -132,38 +245,30 @@ button:hover {
   font-size: 14px;
   color: #ccc;
 }
-
 #paperwork-form input,
 #paperwork-form select,
 #paperwork-form textarea {
   width: 100%;
   margin-bottom: 20px;
   padding: 12px;
-  border: none;
+  border: 1px solid #555;
   border-radius: 8px;
   background-color: #444;
   color: #fff;
   font-size: 14px;
 }
-
 #paperwork-form textarea {
-  height: 150px; /* Increased textarea height */
-  resize: none; /* Disable resizing */
+  height: 150px;
+  resize: none;
 }
-
-#paperwork-form button {
-  width: 48%; /* Buttons take up half the width */
-  padding: 10px;
-  margin: 5px 1%;
-  border: none;
-  border-radius: 8px;
-  background-color: #007bff;
-  color: #fff;
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.form-buttons button {
+  width: 48%;
+  padding: 12px;
+  margin: 0;
   font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-#paperwork-form button:hover {
-  background-color: #0056b3;
 }
