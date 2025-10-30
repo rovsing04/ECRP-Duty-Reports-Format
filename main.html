@@ -41,71 +41,194 @@
         />
       </div>
 
+      <!-- Notes sektion med avanceret BBCode Toolbar -->
       <div class="form-section">
         <label for="notes">Notes</label>
         <div id="notes-display" style="margin-bottom: 10px"></div>
-        <input type="text" id="note-input" placeholder="Enter a note..." />
-        <button id="add-note" onclick="addNote()">Add</button>
+
+        <div id="bbcode-toolbar">
+          <!-- Række 1 -->
+          <button type="button" class="toolbar-btn" onclick="insertBBCode('b')">
+            <b>B</b>
+          </button>
+          <button type="button" class="toolbar-btn" onclick="insertBBCode('i')">
+            <i>I</i>
+          </button>
+          <button type="button" class="toolbar-btn" onclick="insertBBCode('u')">
+            <u>U</u>
+          </button>
+          <button type="button" class="toolbar-btn" onclick="insertBBCode('s')">
+            <s>S</s>
+          </button>
+          <span class="toolbar-separator"></span>
+          <button
+            type="button"
+            class="toolbar-btn"
+            onclick="insertBBCode('quote')"
+          >
+            Quote
+          </button>
+          <button
+            type="button"
+            class="toolbar-btn"
+            onclick="insertBBCode('code')"
+          >
+            Code
+          </button>
+          <span class="toolbar-separator"></span>
+          <button
+            type="button"
+            class="toolbar-btn"
+            onclick="insertBBCode('url')"
+          >
+            URL
+          </button>
+          <button
+            type="button"
+            class="toolbar-btn"
+            onclick="insertBBCode('img')"
+          >
+            IMG
+          </button>
+          <span class="toolbar-separator"></span>
+          <button
+            type="button"
+            class="toolbar-btn"
+            onclick="insertBBCode('color')"
+          >
+            Color
+          </button>
+          <select
+            class="toolbar-select"
+            onchange="if(this.value) insertBBCode('size', this.value)"
+          >
+            <option value="">Size</option>
+            <option value="200">Huge</option>
+            <option value="150">Large</option>
+            <option value="85">Small</option>
+            <option value="50">Tiny</option>
+          </select>
+
+          <!-- Række 2 -->
+          <button
+            type="button"
+            class="toolbar-btn"
+            onclick="insertBBCode('list')"
+          >
+            List
+          </button>
+          <button
+            type="button"
+            class="toolbar-btn"
+            onclick="insertBBCode('list', '1')"
+          >
+            Num List
+          </button>
+          <button
+            type="button"
+            class="toolbar-btn"
+            onclick="insertBBCode('*')"
+          >
+            Item
+          </button>
+          <span class="toolbar-separator"></span>
+          <button type="button" class="toolbar-btn" onclick="insertBBCode('sup')">
+            x²
+          </button>
+          <button type="button" class="toolbar-btn" onclick="insertBBCode('sub')">
+            x₂
+          </button>
+          <span class="toolbar-separator"></span>
+          <button
+            type="button"
+            class="toolbar-btn"
+            onclick="insertBBCode('spoiler')"
+          >
+            Spoiler
+          </button>
+          <button
+            type="button"
+            class="toolbar-btn"
+            onclick="insertBBCode('highlight')"
+          >
+            Highlight
+          </button>
+          <span class="toolbar-separator"></span>
+          <button
+            type="button"
+            class="toolbar-btn"
+            onclick="insertBBCode('mention')"
+          >
+            Mention
+          </button>
+          <button
+            type="button"
+            class="toolbar-btn"
+            onclick="insertBBCode('ooc')"
+          >
+            OOC
+          </button>
+          <button
+            type="button"
+            class="toolbar-btn"
+            onclick="insertBBCode('me')"
+          >
+            ME
+          </button>
+        </div>
+
+        <textarea id="note-input" placeholder="Note details..."></textarea>
+        <button id="add-note" onclick="addNote()">Add Note</button>
       </div>
 
       <div class="form-section">
         <label for="paperwork">Paperwork</label>
         <div id="paperwork-display" style="margin-bottom: 10px"></div>
-        <button id="add-paperwork" onclick="showPaperworkForm()">Add</button>
+        <button id="add-paperwork" onclick="showPaperworkForm()">
+          Add Paperwork
+        </button>
       </div>
 
       <div class="action-buttons">
-        <button id="save">Save</button>
-        <button id="clear">Clear</button>
+        <button id="save">Save and Copy BBCode</button>
+        <button id="clear">Clear All Data</button>
       </div>
+    </div>
 
-      <div
-        id="paperwork-form"
-        style="
-          display: none;
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          background: #333;
-          padding: 20px;
-          border-radius: 10px;
-          z-index: 1000;
-        "
-      >
-        <h2 id="paperwork-form-title">Add Paperwork</h2>
-        <label for="paperwork-type">Paperwork Type</label>
-        <select id="paperwork-type">
-          <option value="">Select Type</option>
-          <option value="arrest-report">Arrest Report</option>
-          <option value="warrant-report">Warrant Report</option>
-          <option value="impound-report">Impound Report</option>
-          <option value="impound-release-report">Impound Release Report</option>
-          <option value="use-of-force-report">Use of Force Report</option>
-          <option value="traffic-stop-report">Traffic Stop Report</option>
-          <option value="incident-report">Incident Report</option>
-          <option value="gang-incident-report">Gang Incident Report</option>
-          <option value="gang-graffiti-report">Gang Graffiti Report</option>
-          <option value="evidence-release-report">
-            Evidence Release Report
-          </option>
-          <option value="ridealong-report">Ridealong Report</option>
-          <option value="citation-report">Citation Report</option>
-        </select>
-
-        <label for="paperwork-title">Title</label>
-        <input type="text" id="paperwork-title" placeholder="Enter title" />
-
-        <label for="paperwork-description">BBcode Quote</label>
-        <textarea
-          id="paperwork-description"
-          placeholder="Enter details..."
-        ></textarea>
-
-        <div style="margin-top: 10px">
-          <button onclick="submitPaperwork()">Submit</button>
-          <button onclick="closePaperworkForm()">Cancel</button>
-        </div>
+    <!-- Modal for Paperwork -->
+    <div class="modal-overlay" onclick="closePaperworkForm()"></div>
+    <div id="paperwork-form">
+      <h2 id="paperwork-form-title">Add Paperwork</h2>
+      <select id="paperwork-type">
+        <option value="">Select Type</option>
+        <option value="arrest-report">Arrest Report</option>
+        <option value="warrant-report">Warrant Report</option>
+        <option value="impound-report">Impound Report</option>
+        <option value="impound-release-report">Impound Release Report</option>
+        <option value="use-of-force-report">Use of Force Report</option>
+        <option value="traffic-stop-report">Traffic Stop Report</option>
+        <option value="incident-report">Incident Report</option>
+        <option value="gang-incident-report">Gang Incident Report</option>
+        <option value="gang-graffiti-report">Gang Graffiti Report</option>
+        <option value="evidence-release-report">
+          Evidence Release Report
+        </option>
+        <option value="ridealong-report">Ridealong Report</option>
+        <option value="citation-report">Citation Report</option>
+      </select>
+      <input type="text" id="paperwork-title" placeholder="Enter title" />
+      <textarea
+        id="paperwork-description"
+        placeholder="Enter details..."
+      ></textarea>
+      <div class="form-buttons">
+        <button onclick="submitPaperwork()">Submit</button>
+        <button
+          onclick="closePaperworkForm()"
+          style="background-color: #6c757d"
+        >
+          Cancel
+        </button>
       </div>
     </div>
   </body>
